@@ -1,45 +1,66 @@
-// NEXT LEVEL Website JavaScript
+
+// NEXT LEVEL Premium Website JavaScript
 
 
-// Mobile Menu
+// Navbar effect while scrolling
 
-const menu = document.querySelector(".menu");
-const nav = document.querySelector("nav");
+const header = document.querySelector("header");
 
 
-if(menu){
+window.addEventListener("scroll",()=>{
 
-menu.addEventListener("click",()=>{
 
-    nav.classList.toggle("active");
+    if(window.scrollY > 50){
+
+        header.style.boxShadow =
+        "0 10px 30px rgba(0,0,0,0.12)";
+
+    }
+
+    else{
+
+        header.style.boxShadow="none";
+
+    }
+
 
 });
 
-}
 
 
 
-// Smooth scrolling for navigation
 
-document.querySelectorAll("nav a").forEach(link=>{
+// Smooth scrolling buttons
 
-    link.addEventListener("click",function(e){
 
-        e.preventDefault();
+document.querySelectorAll("a").forEach(link=>{
 
-        const target = document.querySelector(
-            this.getAttribute("href")
+
+    link.addEventListener("click",(e)=>{
+
+
+        const target =
+        document.querySelector(
+        link.getAttribute("href")
         );
+
 
         if(target){
 
+            e.preventDefault();
+
+
             target.scrollIntoView({
+
                 behavior:"smooth"
+
             });
 
         }
 
+
     });
+
 
 });
 
@@ -47,40 +68,20 @@ document.querySelectorAll("nav a").forEach(link=>{
 
 
 
-// Hero button
-
-const heroButton = document.querySelector(".hero button");
 
 
-if(heroButton){
-
-heroButton.addEventListener("click",()=>{
-
-    document
-    .querySelector("#collection")
-    .scrollIntoView({
-        behavior:"smooth"
-    });
-
-});
-
-}
+// Reveal animations
 
 
-
-
-
-// Reveal animation while scrolling
-
-
-const revealElements = document.querySelectorAll(
-    ".product, .features div, .review, .images img"
+const elements =
+document.querySelectorAll(
+".collection-card, .features div, .review, .gallery img, .story-text"
 );
 
 
-const observer = new IntersectionObserver(
 
-(entries)=>{
+const observer =
+new IntersectionObserver((entries)=>{
 
 
 entries.forEach(entry=>{
@@ -88,9 +89,9 @@ entries.forEach(entry=>{
 
 if(entry.isIntersecting){
 
-entry.target.style.opacity="1";
 
-entry.target.style.transform="translateY(0)";
+entry.target.classList.add("show");
+
 
 }
 
@@ -98,26 +99,16 @@ entry.target.style.transform="translateY(0)";
 });
 
 
-},
-
-{
+},{
 threshold:0.15
-}
-
-
-);
+});
 
 
 
-revealElements.forEach(element=>{
+elements.forEach(element=>{
 
 
-element.style.opacity="0";
-
-element.style.transform="translateY(40px)";
-
-element.style.transition="0.8s";
-
+element.classList.add("hidden");
 
 observer.observe(element);
 
@@ -128,11 +119,78 @@ observer.observe(element);
 
 
 
-// WhatsApp button
+
+
+
+// Hero buttons
+
+
+const shopButton =
+document.querySelector(".shop-btn");
+
+
+
+if(shopButton){
+
+
+shopButton.addEventListener("click",()=>{
+
+
+document
+.querySelector("#collections")
+.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+
+});
+
+
+}
+
+
+
+
+
+const exploreButton =
+document.querySelector(".hero-buttons button");
+
+
+
+if(exploreButton){
+
+
+exploreButton.addEventListener("click",()=>{
+
+
+document
+.querySelector("#collections")
+.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+// WhatsApp contact button
 
 
 const contactButton =
-document.querySelector("#contact button");
+document.querySelector(".contact button");
+
 
 
 if(contactButton){
@@ -142,8 +200,11 @@ contactButton.addEventListener("click",()=>{
 
 
 window.open(
+
 "https://wa.me/91XXXXXXXXXX",
+
 "_blank"
+
 );
 
 
@@ -157,24 +218,42 @@ window.open(
 
 
 
-// Current year automatically
+
+// Product image zoom effect
 
 
-const footerText =
-document.querySelector("footer p");
+const images =
+document.querySelectorAll(
+".collection-card img"
+);
 
 
-if(footerText){
+
+images.forEach(img=>{
 
 
-const year = new Date().getFullYear();
+img.addEventListener("mouseenter",()=>{
 
 
-footerText.innerHTML =
-`© ${year} NEXT LEVEL. All Rights Reserved.`;
+img.style.transform="scale(1.05)";
+
+img.style.transition="0.5s";
 
 
-}
+});
+
+
+
+img.addEventListener("mouseleave",()=>{
+
+
+img.style.transform="scale(1)";
+
+
+});
+
+
+});
 
 
 
@@ -182,5 +261,5 @@ footerText.innerHTML =
 
 
 console.log(
-"NEXT LEVEL premium website loaded successfully"
+"NEXT LEVEL premium fashion website loaded"
 );
